@@ -1,0 +1,94 @@
+.gacha-box-background {
+    background-color: floralwhite;
+    border-radius: 25px;
+    width: 900px;
+    height: 800px; 
+    box-shadow: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 3vh;
+    align-items: center;
+    justify-content: center;
+    object-fit: contain;
+    padding: 2% 2%;
+}
+
+.results {
+    border-style: solid;
+    border-radius: 5px;
+    border-color: blue;
+    background-color: aliceblue;
+    padding: 5px 10px;
+}    
+
+.again-button {
+    align-items: center;
+    border-radius: 10px;
+    height: 60px;
+    width: 300px;
+    background-color: cornflowerblue;
+    color:whitesmoke;
+}
+.again-button:hover {
+    background-color: darkblue;
+}
+.again-button:active {
+    opacity: 40%;
+    outline: 3px;
+}
+
+.roll-button {
+    position: relative;
+    height: -120px;
+    align-items: center;
+    transition: all .3s ease-in-out;
+    animation: float 3s ease-in-out infinite;
+}
+.roll-button:hover {
+    /* animation: grow 3s ease-in-out infinite; */
+}
+.roll-button:active {
+    opacity: 40%;
+}
+
+.fill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden
+}
+
+.fill img {
+    border-radius: 23px;
+    flex-shrink: 0;
+    height: 90%;
+    width: 90%;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(-40px);
+    }
+
+    50% {
+        transform: translateY(80px);
+    }
+
+    100% {
+        transform: translateY(-40px);
+    }
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(1.0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1.0);
+    }
+}

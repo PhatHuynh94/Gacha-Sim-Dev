@@ -1,0 +1,20 @@
+<div class="gacha-box-background">
+    <button class="roll-button"
+            *ngIf="!showResults"
+            (click)="onRollClick()">
+        <img src="../../assets/img/others/capsule.png" alt=""/>
+    </button>
+    <button class="again-button"
+            *ngIf="showResults"
+            (click)="onAgainClick()">
+        GO AGAIN?
+    </button>
+    <div>
+        <span *ngIf="showResults" class="results">You got a {{cardRarityGotten}} card!</span>
+    </div>
+    <div 
+        class="fill">
+        <img *ngIf="showResults" [src]="imageUrl">
+    </div>
+</div>
+<script src=""></script>
