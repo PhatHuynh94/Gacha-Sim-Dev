@@ -1,9 +1,2 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
-
-html {
-    height: 130vh;
-    background: linear-gradient(to bottom right, CadetBlue, cornflowerblue);
-    font-family: Copperplate, Papyrus, fantasy;
-}
-html, body { height: 100%; }

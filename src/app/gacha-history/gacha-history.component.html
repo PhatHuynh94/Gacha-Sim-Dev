@@ -1,38 +1,30 @@
-<div class="gacha-history-background">
-    <div>
-        <h1>Card History</h1>
-    </div>
-    <div>
-        <table class="table-auto">
-            <thead>
-                <tr>
-                    <th>M</th>
-                    <th>R</th>
-                    <th>U</th>
-                    <th>C</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{cardCount[0]}}</td>
-                    <td>{{cardCount[1]}}</td>
-                    <td>{{cardCount[2]}}</td>
-                    <td>{{cardCount[3]}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div>
-        <!-- <table mat-table [dataSource]="cardList">
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Card </th>
-                <td mat-cell *matCellDef="let card"> {{card.fileName}} </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
-        </table>
-        <mat-paginator  [pageSize]="8"
-                        aria-label="Select page">
-        </mat-paginator> -->
+<div class="over-flow-hidden rounded-xl bg-white shadow-xs">
+    <div class="space-y-4 p-6">
+        <div class="text-center">
+            <h1 class="font-bold text-3xl">Card History</h1>
+        </div>
+        <div>
+            <table class="w-full table-fixed border text-center">
+                <thead>
+                    <tr>
+                        <th class="border">M</th>
+                        <th class="border">R</th>
+                        <th class="border">U</th>
+                        <th class="border">C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border">{{cardCount[0]}}</td>
+                        <td class="border">{{cardCount[1]}}</td>
+                        <td class="border">{{cardCount[2]}}</td>
+                        <td class="border">{{cardCount[3]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+
+        </div>
     </div>
 </div>
