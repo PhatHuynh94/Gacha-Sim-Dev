@@ -14,7 +14,6 @@ export class AppComponent {
   @ViewChild(GachaHistoryComponent) history!: GachaHistoryComponent;
 
   title = 'Gacha-Sim';
-  recentCard:Card = {};
 
   updateHistory(card: Card) {
     this.history.updateCardList(card);

@@ -12,9 +12,7 @@ export class GachaBoxComponent {
   @Output() onRoll = new EventEmitter();
 
   showResults: boolean;
-
   cardRarityGotten: string = "";
-  cardGotten: Card = {};
   imageUrl: string = "";
 
   constructor() { 
@@ -24,9 +22,9 @@ export class GachaBoxComponent {
   onRollClick() {
     this.showResults = true;
     this.cardRarityGotten = cardRarity[this.getRarity()];
-    this.cardGotten = this.getCard(this.cardRarityGotten);
-    this.imageUrl = "../../assets/img/"+this.cardGotten.rarity+"/"+this.cardGotten.fileName;
-    this.onRoll.emit(this.cardGotten);
+    let cardGotten = this.getCard(this.cardRarityGotten);
+    this.imageUrl = "../../assets/img/"+cardGotten.rarity+"/"+cardGotten.fileName;
+    this.onRoll.emit(cardGotten);
   }
 
   onAgainClick() {

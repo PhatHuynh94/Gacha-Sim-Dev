@@ -11,8 +11,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   styleUrl: './gacha-history.component.css'
 })
 export class GachaHistoryComponent {
-  public cardList: Card[] = [];
-  public cardCount: number[]
+  cardList: Card[] = [];
+  cardCount: number[]
   columnsToDisplay = ['id','name'];
 
   constructor() { 
