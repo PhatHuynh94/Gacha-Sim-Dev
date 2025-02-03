@@ -1,9 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Card } from '../models/card-model';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { AbstractControl, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'gacha-history',
@@ -11,35 +10,31 @@ import { AbstractControl, FormArray } from '@angular/forms';
   templateUrl: './gacha-history.component.html',
   styleUrl: './gacha-history.component.css'
 })
-export class GachaHistoryComponent implements OnInit {
-  @Input() recentCard: Card = {};
-
-  public cardCount: number[]
+export class GachaHistoryComponent {
   public cardList: Card[] = [];
-  columnsToDisplay = ['name'];
+  public cardCount: number[]
+  columnsToDisplay = ['id','name'];
 
   constructor() { 
-    this.cardCount = [0,0,0,0]
+    this.cardCount = [0,0,0,0];
+    this.retrieveCardHistory();
   }
 
-  ngOnInit(): void {
-
-  }
-
-  ngOnChanges() {
-    this.cardList.push(this.recentCard);
-    this.updateCardCount();
+  updateCardList(card: Card) {
+    this.cardList.push(card);
+    this.updateCardCount(card);
     this.updateTable();
+    this.saveCardHistory();
   }
 
-  updateCardCount() {
-    if(this.recentCard.rarity === "MYTHIC")
+  updateCardCount(card:Card) {
+    if(card.rarity === "MYTHIC")
       this.cardCount[0]++;
-    else if (this.recentCard.rarity === "RARE")
+    else if (card.rarity === "RARE")
       this.cardCount[1]++;
-    else if (this.recentCard.rarity === "UNCOMMON")
+    else if (card.rarity === "UNCOMMON")
       this.cardCount[2]++;
-    else if(this.recentCard.rarity === "COMMON")
+    else if(card.rarity === "COMMON")
       this.cardCount[3]++;
   }
 
@@ -47,7 +42,15 @@ export class GachaHistoryComponent implements OnInit {
     //TODO: Implement code to dynamically update table after rolling
   }
 
-  saveTableHistory() {
-    //TODO: Save cardList to memory
+  saveCardHistory() {
+    localStorage.setItem('cardHistoryList', JSON.stringify(this.cardList));
+  }
+
+  retrieveCardHistory() {
+    let jsonString = localStorage.getItem('cardHistoryList');
+    if(jsonString) {
+      this.cardList = JSON.parse(jsonString);
+      this.cardList.forEach(c => this.updateCardCount(c));
+    }
   }
 }

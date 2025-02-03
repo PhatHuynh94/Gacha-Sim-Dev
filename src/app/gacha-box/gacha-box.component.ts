@@ -14,6 +14,7 @@ export class GachaBoxComponent {
   showResults: boolean;
 
   cardRarityGotten: string = "";
+  cardGotten: Card = {};
   imageUrl: string = "";
 
   constructor() { 
@@ -23,14 +24,9 @@ export class GachaBoxComponent {
   onRollClick() {
     this.showResults = true;
     this.cardRarityGotten = cardRarity[this.getRarity()];
-    this.imageUrl = this.getCard(this.cardRarityGotten);
-    let card:Card = {
-      name: "",
-      id: "",
-      rarity: this.cardRarityGotten,
-      fileName: this.imageUrl,
-    }
-    this.onRoll.emit(card);
+    this.cardGotten = this.getCard(this.cardRarityGotten);
+    this.imageUrl = "../../assets/img/"+this.cardGotten.rarity+"/"+this.cardGotten.fileName;
+    this.onRoll.emit(this.cardGotten);
   }
 
   onAgainClick() {
@@ -44,18 +40,26 @@ export class GachaBoxComponent {
     else if(rand<0.95) return 2;
     else return 3;
   }
-  getCard(cardRarity: string): string {
-    let url = "../../assets/img/"+cardRarity+"/";
+  getCard(cardRarity: string): Card {
+    let card;
     let cardNum = Math.floor(Math.random()*1);
-    if(cardRarity === "MYTHIC")
-      url += MythicList[cardNum];
-    else if (cardRarity === "RARE")
-      url += RareList[cardNum];
-    else if (cardRarity === "UNCOMMON")
-      url += UncommonList[cardNum];
-    else
-      url += CommonList[cardNum];
-    return url;
+    if(cardRarity === "MYTHIC") {
+      cardNum = Math.floor(Math.random()*MythicList.length);
+      card = MythicList[cardNum];
+    }
+    else if (cardRarity === "RARE") {
+      cardNum = Math.floor(Math.random()*RareList.length);
+      card = RareList[cardNum];
+    }
+    else if (cardRarity === "UNCOMMON") {
+      cardNum = Math.floor(Math.random()*UncommonList.length);
+      card = UncommonList[cardNum];
+    }
+    else {
+      cardNum = Math.floor(Math.random()*CommonList.length);
+      card = CommonList[cardNum];
+    }
+    return card;
   }
 
   runConfetti() {

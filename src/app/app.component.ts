@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Card } from './models/card-model';
 import { GachaBoxComponent } from './gacha-box/gacha-box.component'
@@ -11,10 +11,12 @@ import { GachaHistoryComponent } from './gacha-history/gacha-history.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  @ViewChild(GachaHistoryComponent) history!: GachaHistoryComponent;
+
   title = 'Gacha-Sim';
   recentCard:Card = {};
 
   updateHistory(card: Card) {
-    this.recentCard = card;
+    this.history.updateCardList(card);
   }
 }

@@ -7,24 +7,50 @@
             <table class="w-full table-fixed border text-center">
                 <thead>
                     <tr>
-                        <th class="border">M</th>
-                        <th class="border">R</th>
-                        <th class="border">U</th>
-                        <th class="border">C</th>
+                        <th class="border bg-teal-100">C</th>
+                        <th class="border bg-slate-400">U</th>
+                        <th class="border bg-amber-300">R</th>
+                        <th class="border bg-rose-700">M</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="border">{{cardCount[0]}}</td>
-                        <td class="border">{{cardCount[1]}}</td>
-                        <td class="border">{{cardCount[2]}}</td>
                         <td class="border">{{cardCount[3]}}</td>
+                        <td class="border">{{cardCount[2]}}</td>
+                        <td class="border">{{cardCount[1]}}</td>
+                        <td class="border">{{cardCount[0]}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div>
+            <mat-table [dataSource]="cardList" class="w-full table-fixed border text-center">
+                <!-- <thead>
+                    <tr>
+                        <th class="border  w-[20%]">#</th>
+                        <th class="border">Card Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody> -->
 
+                <ng-container matColumnDef="count">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> # </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+                  </ng-container>
+              
+                  <ng-container matColumnDef="cardName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Card Name </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.fileName}} </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: columnsToDisplay;">
+                  </mat-row>
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>
     </div>
 </div>

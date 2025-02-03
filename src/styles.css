@@ -1,2 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+html {
+    background: linear-gradient(to bottom right, skyblue, slateblue);
+    height: 110vh;
+}
