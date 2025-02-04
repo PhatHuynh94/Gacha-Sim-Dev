@@ -1,6 +1,6 @@
 export interface Card {
     name?: string;
-    id?: number;
+    id?: string;
     rarity?: string;
     fileName?: string;
     code?: string;
