@@ -22,7 +22,7 @@ export class GachaBoxComponent {
   onRollClick() {
     this.showResults = true;
     this.cardRarityGotten = cardRarity[this.getRarity()];
-    let cardGotten = this.getCard(this.cardRarityGotten);
+    const cardGotten = this.getCard(this.cardRarityGotten);
     this.imageUrl = "../../assets/img/"+cardGotten.rarity+"/"+cardGotten.fileName;
     this.onRoll.emit(cardGotten);
   }

@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Card } from '../models/card-model';
 import { CommonModule } from '@angular/common';
-import { MatTableModule, MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'gacha-history',
@@ -10,13 +10,19 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   templateUrl: './gacha-history.component.html',
   styleUrl: './gacha-history.component.css'
 })
-export class GachaHistoryComponent {
+export class GachaHistoryComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(); 
+  dataSource = new MatTableDataSource<Card>([]);
   cardList: Card[] = [];
-  cardCount: number[]
+  cardCount: number[] = [0,0,0,0];;
   columnsToDisplay = ['id','name'];
 
-  constructor() { 
-    this.cardCount = [0,0,0,0];
+  constructor() { }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+  ngOnInit(): void {
     this.retrieveCardHistory();
   }
 
@@ -39,7 +45,7 @@ export class GachaHistoryComponent {
   }
 
   updateTable() {
-    //TODO: Implement code to dynamically update table after rolling
+    this.dataSource.data = this.cardList;
   }
 
   saveCardHistory() {
@@ -52,5 +58,13 @@ export class GachaHistoryComponent {
       this.cardList = JSON.parse(jsonString);
       this.cardList.forEach(c => this.updateCardCount(c));
     }
+    this.dataSource.data = this.cardList;
+  }
+
+  deleteHistory() {
+    localStorage.removeItem('cardHistoryList');
+    this.cardList = [];
+    this.cardCount = [0,0,0,0];
+    this.dataSource.data = this.cardList;
   }
 }

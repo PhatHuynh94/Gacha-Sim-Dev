@@ -23,34 +23,29 @@
                 </tbody>
             </table>
         </div>
-        <div>
-            <mat-table [dataSource]="cardList" class="w-full table-fixed border text-center">
-                <!-- <thead>
-                    <tr>
-                        <th class="border  w-[20%]">#</th>
-                        <th class="border">Card Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    </tr>
-                </tbody> -->
-
-                <ng-container matColumnDef="count">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> # </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+        <div style="min-height:624px; overflow: auto">
+            <mat-table [dataSource]="dataSource" class="text-center">
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+                    <mat-cell *matCellDef="let i = index"> {{this.paginator.pageIndex == 0 ? i + 1 : 1 + i + this.paginator.pageIndex * this.paginator.pageSize}} </mat-cell>
                   </ng-container>
-              
-                  <ng-container matColumnDef="cardName">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> Card Name </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.fileName}} </mat-cell>
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> Card Name </mat-header-cell>
+                    <mat-cell *matCellDef="let card"> {{card.name}} </mat-cell>
                   </ng-container>
-
                   <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-                  <mat-row *matRowDef="let row; columns: columnsToDisplay;">
-                  </mat-row>
+                  <mat-row *matRowDef="let card; columns: columnsToDisplay;"></mat-row>
             </mat-table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            <mat-paginator  #paginator 
+                            [pageSize]="10">
+            </mat-paginator>
+        </div>
+        <div class="mb-6 flex items-center justify-center">
+            <button (click)="deleteHistory()"
+                    type="button"
+                    class="inline-flex items-center justify-center rounded-md ring ring-rose-700 focus:ring-offset-2 delete-button-bg hover:opacity-75 font-semibold">
+                DELETE HISTORY
+            </button>
         </div>
     </div>
 </div>

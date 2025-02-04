@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { Card } from './models/card-model';
 import { GachaBoxComponent } from './gacha-box/gacha-box.component'
 import { GachaHistoryComponent } from './gacha-history/gacha-history.component';
