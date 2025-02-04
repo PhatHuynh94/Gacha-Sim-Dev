@@ -26,7 +26,7 @@ export class GachaBoxComponent {
     this.cardRarityGotten = cardRarity[this.getRarity()];
     const cardGotten = this.getCard(this.cardRarityGotten);
     this.imageUrl = "../../assets/img/"+cardGotten.rarity+"/"+cardGotten.fileName;
-    this.runConfetti();
+    this.runConfetti(cardGotten.rarity);
     this.onRoll.emit(cardGotten);
   }
 
@@ -63,7 +63,8 @@ export class GachaBoxComponent {
     return card;
   }
 
-  runConfetti() {
-    this.confettiService.canon();
+  runConfetti(rarity?: string) {
+    if(rarity == "RARE" || rarity == "MYTHIC")
+      this.confettiService.canon();
   }
 }
