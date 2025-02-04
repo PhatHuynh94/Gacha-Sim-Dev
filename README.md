@@ -2,6 +2,12 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
 
+Roll the Gacha to get a card.
+
+(Note: Card Images are not included for copyright reasons)
+
+To add cards update the card lists in the card-model.ts and add the card image to the corresponding folder in assets\img
+
 ## Development server
 
 To start a local development server, run:
