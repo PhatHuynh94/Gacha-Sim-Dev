@@ -1,12 +1,14 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Card, cardRarity, MythicList, RareList, UncommonList, CommonList } from '../models/card-model';
 import { CommonModule } from '@angular/common';
+import { ConfettiService } from '../services/confetti/confetti.service';
 
 @Component({
   selector: 'gacha-box',
   imports: [ CommonModule ],
   templateUrl: './gacha-box.component.html',
-  styleUrl: './gacha-box.component.css'
+  styleUrl: './gacha-box.component.css',
+  providers: [ ConfettiService ]
 })
 export class GachaBoxComponent {
   @Output() onRoll = new EventEmitter();
@@ -15,7 +17,7 @@ export class GachaBoxComponent {
   cardRarityGotten: string = "";
   imageUrl: string = "";
 
-  constructor() { 
+  constructor(private confettiService: ConfettiService) { 
     this.showResults = false;
   }
 
@@ -24,6 +26,7 @@ export class GachaBoxComponent {
     this.cardRarityGotten = cardRarity[this.getRarity()];
     const cardGotten = this.getCard(this.cardRarityGotten);
     this.imageUrl = "../../assets/img/"+cardGotten.rarity+"/"+cardGotten.fileName;
+    this.runConfetti();
     this.onRoll.emit(cardGotten);
   }
 
@@ -61,12 +64,6 @@ export class GachaBoxComponent {
   }
 
   runConfetti() {
-    // confetti({
-    //   particleCount: 100,
-    //   spread: 70,
-    //   origin: {
-    //     y: 0.6
-    //   }
-    // });
+    this.confettiService.canon();
   }
 }
